@@ -1,0 +1,11 @@
+{
+  "name": "review-manipulation-temporal",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "demo": "node src/temporal.mjs --input data/mock/reviews.jsonl --cutoff 2024-01-15T00:00:00Z --out outputs/demo --mock",
+    "demo:stage2": "node src/group-temporal.mjs --input data/mock/stage2_reviews.jsonl --groups data/mock/stage2_groups.jsonl --config configs/temporal-stage2.json --cutoff 2024-01-15 --out outputs/stage2-demo --mock"
+  },
+  "engines": { "node": ">=18" }
+}

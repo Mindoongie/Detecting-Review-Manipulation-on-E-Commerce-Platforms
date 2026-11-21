@@ -1,0 +1,8 @@
+{
+  "tau_days": 30,
+  "beta_days": 180,
+  "burst_window_days": 1,
+  "baseline_windows": 7,
+  "burst_min_count": 3,
+  "burst_std_multiplier": 3
+}

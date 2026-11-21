@@ -1,0 +1,11 @@
+{"review_id":"r01","user_id":"u1","product_id":"p1","timestamp":"2024-01-01","rating":5}
+{"review_id":"r02","user_id":"u2","product_id":"p1","timestamp":"2024-01-02T07:00:00+07:00","rating":3}
+{"review_id":"r03","user_id":"u1","product_id":"p2","timestamp":"2024-01-03","rating":4}
+{"review_id":"r04","user_id":"u3","product_id":"p2","timestamp":"2024-01-05","rating":2}
+{"review_id":"r05","user_id":"u1","product_id":"p1","timestamp":"2024-01-10","rating":5}
+{"review_id":"r06","user_id":"u4","product_id":"p1","timestamp":"2024-01-10","rating":5}
+{"review_id":"r07","user_id":"u5","product_id":"p1","timestamp":"2024-01-10","rating":5}
+{"review_id":"r08","user_id":"u6","product_id":"p1","timestamp":"2024-01-10","rating":4}
+{"review_id":"r09","user_id":"u7","product_id":"p1","timestamp":"2024-01-10","rating":5}
+{"review_id":"r10","user_id":"u2","product_id":"p2","timestamp":"2024-01-12","rating":3}
+{"review_id":"future","user_id":"u1","product_id":"p1","timestamp":"2024-02-01","rating":1}
