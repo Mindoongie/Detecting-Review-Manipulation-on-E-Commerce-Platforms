@@ -1,0 +1,28 @@
+{
+  "stage": "stage1_text_b1",
+  "owner": "TV3 (lanh)",
+  "preprocess": {
+    "lowercase": true,
+    "expand_contractions": true,
+    "preserve_negations": true,
+    "remove_urls": true,
+    "remove_html": true,
+    "keep_digits": true,
+    "strip_punctuation": true
+  },
+  "eda": {
+    "top_k_words": 30,
+    "top_k_bigrams": 30,
+    "top_k_duplicates": 20
+  },
+  "tfidf": {
+    "ngram_range": [1, 2],
+    "min_df": 1,
+    "max_df": 0.95,
+    "max_features": 20000,
+    "sublinear_tf": true,
+    "norm": "l2",
+    "use_stopwords": false,
+    "svd_components": 0
+  }
+}
