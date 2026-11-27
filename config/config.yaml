@@ -1,0 +1,87 @@
+# ============================================================
+# TV5 — Giao thức Benchmark, Baseline & Giả lập (Synthetic)
+# Configuration for Phase 1: Temporal Split + B0/B1 Baselines
+# ============================================================
+
+data:
+  dataset: "YelpChi"
+  processed_path: "data/processed/"
+  raw_path: "data/raw/"
+  mock_path: "data/mock/"
+  # Nếu chưa có data thật trong processed_path / raw_path, dùng realistic mock
+  use_mock: true
+  mock_n_reviews: 10000
+
+split:
+  # Chia theo thời gian (chronological) — chống rò rỉ dữ liệu
+  method: "temporal"
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+  # Tần suất snapshot chấm điểm theo lô (W = cuối mỗi tuần, M = cuối mỗi tháng, D = ngày)
+  snapshot_freq: "W"
+  # Cắt ranh giới sạch giữa các tập theo ranh giới snapshot/ngày (train_max < val_min < test_max)
+  align_boundary: true
+
+features:
+  b0:
+    # Đặc trưng thô cơ bản: chỉ từ review đơn lẻ (kiểm tra pipeline)
+    columns:
+      - rating
+      - review_length_chars
+      - review_length_words
+      - review_length_sentences
+      - avg_word_length
+      - exclamation_count
+      - question_mark_count
+      - capital_ratio
+
+  b1:
+    # Baseline mạnh: B0 + nội dung TF-IDF (fit trên train) + hành vi user + sản phẩm + thời gian
+    # Tất cả đặc trưng lịch sử tính nhân quả đến mốc snapshot T_k (không đọc tương lai > T_k)
+    tfidf_max_features: 500
+    tfidf_ngram_range: [1, 2]
+    tfidf_min_df: 5
+    tfidf_max_df: 0.95
+    snapshot_freq: "W"
+    recent_window_days: 7
+
+model:
+  # Chạy cả 2 mô hình bảng để so sánh công bằng B0 vs B1 trên cùng backbone
+  # Có thể truyền --model lightgbm | logistic_regression | all qua CLI
+  types:
+    - "logistic_regression"
+    - "lightgbm"
+  lightgbm:
+    n_estimators: 200
+    max_depth: 6
+    learning_rate: 0.05
+    num_leaves: 31
+    min_child_samples: 20
+    subsample: 0.8
+    colsample_bytree: 0.8
+    class_weight: "balanced"
+    random_state: 42
+    verbose: -1
+  logistic_regression:
+    C: 1.0
+    max_iter: 1000
+    class_weight: "balanced"
+    solver: "lbfgs"
+    random_state: 42
+
+metrics:
+  primary: "average_precision"
+  all:
+    - auc_roc
+    - average_precision
+    - f1_binary
+    - precision_at_k
+    - recall_at_k
+  k_values: [100, 500, 1000]
+
+random_seed: 42
+
+output:
+  results_dir: "outputs/results/"
+  models_dir: "outputs/models/"
