@@ -1,0 +1,12 @@
+# TV2 · GĐ1 — xem docs/tv2_transaction_definition.md
+
+eda:
+  low_activity_threshold: 3   # user < 3 review = "ít hoạt động"
+
+mining:
+  transaction_mode: product_window   # product | product_window
+  window_days: 28
+  min_support: 3              # tuyệt đối: số giao dịch chung tối thiểu
+  max_tx_size: 200            # trần số user / giao dịch (null = không giới hạn)
+  hot_strategy: subwindow     # subwindow | drop
+  min_subwindow_days: 1
